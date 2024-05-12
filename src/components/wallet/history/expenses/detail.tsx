@@ -1,8 +1,11 @@
 import { useAppSelector } from "@/lib/redux/hooks";
 import { RootState } from "@/lib/redux/store";
-import { Button, Flex, FormControl, FormLabel, Input, Skeleton, Stack, Textarea, useColorModeValue } from "@chakra-ui/react";
+import { Button, Flex, FormControl, FormLabel, Input, Skeleton, Stack, Textarea, useColorModeValue, useDisclosure } from "@chakra-ui/react";
+import ModalEditExpense from "./ModalEdit";
 
 export default function DetailExpense() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const expenses: any = useAppSelector((state: RootState) => state.expenses);
   const formatIDR = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(expenses.data?.amount || 0);
 
@@ -16,6 +19,7 @@ export default function DetailExpense() {
       border={'1px'}
       borderColor={useColorModeValue('gray.200', 'gray.800')}
     >
+      <ModalEditExpense isOpen={isOpen} onClose={onClose} expense={expenses.data} />
       {expenses.isLoading
         ? (
           Array.from({ length: 5 }).map((_, i) => (
@@ -51,7 +55,7 @@ export default function DetailExpense() {
               </FormControl>
             </Flex>
             <Flex justify={'end'} pt={5}>
-              <Button colorScheme={'blue'} px={12}>Edit</Button>
+              <Button colorScheme={'blue'} px={12} onClick={onOpen}>Edit</Button>
             </Flex>
           </>
         )

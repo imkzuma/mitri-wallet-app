@@ -69,7 +69,13 @@ export default function ModalEditIncome({ isOpen, onClose, income }: ModalEditIn
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} closeOnEsc={false} closeOnOverlayClick={false}>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      closeOnEsc={false}
+      closeOnOverlayClick={false}
+      size={{ base: 'full', md: 'md' }}
+    >
       <ModalOverlay
         style={{
           backdropFilter: 'blur(4px)',
@@ -122,10 +128,18 @@ export default function ModalEditIncome({ isOpen, onClose, income }: ModalEditIn
               )}
             </Formik>
           </ModalBody>
-          <ModalFooter gap={3}>
-            <Button size={'sm'} onClick={onClose} isDisabled={loading}>Cancel</Button>
+          <ModalFooter gap={3} flexDir={{ base: 'column', md: 'row' }} pb={{ base: 8, md: 5 }}>
             <Button
-              size={'sm'}
+              w={{ base: 'full', md: 'fit-content' }}
+              size={{ base: 'md', md: 'sm' }}
+              isDisabled={loading}
+              onClick={onClose}
+            >
+              Cancel
+            </Button>
+            <Button
+              w={{ base: 'full', md: 'fit-content' }}
+              size={{ base: 'md', md: 'sm' }}
               colorScheme="blue"
               onClick={handleClick}
               isLoading={loading}

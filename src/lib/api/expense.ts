@@ -77,7 +77,7 @@ export const deleteMyExpense = async (id: number, uid: string): Promise<void> =>
   }
 };
 
-export const updateMyExpense = async (id: string, uid: string, expense: Omit<ExpenseItem, 'userId' | 'id'>): Promise<ExpenseItem> => {
+export const updateMyExpense = async (id: number, uid: string, expense: Omit<ExpenseItem, 'userId' | 'id'>): Promise<ExpenseItem> => {
   try {
     const { data } = await WalletApi.get(`/expenses/${id}`);
     if (data.userId !== uid) {

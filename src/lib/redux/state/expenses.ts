@@ -45,6 +45,15 @@ const expenses = createSlice({
     deleteExpense: (state, action) => {
       state.data = state.data.filter((item) => item.id !== action.payload);
     },
+    editExpense: (state, action) => {
+      state.data = state.data.map((item) => {
+        if (item.id === action.payload.id) {
+          return action.payload;
+        }
+
+        return item;
+      });
+    },
   },
 });
 
@@ -54,6 +63,7 @@ export const {
   fetchExpensesFailure,
   fetchExpensesEnd,
   deleteExpense,
+  editExpense,
 } = expenses.actions;
 
 export default expenses;

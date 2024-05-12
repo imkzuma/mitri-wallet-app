@@ -43,7 +43,7 @@ export default function ModalDeleteExpense({ isOpen, onClose, id }: { isOpen: bo
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} size={{ base: 'xs', md: 'md' }}>
       <ModalOverlay
         style={{
           backdropFilter: 'blur(4px)',
@@ -57,14 +57,27 @@ export default function ModalDeleteExpense({ isOpen, onClose, id }: { isOpen: bo
           <ModalBody>
             Are you sure you want to delete this expense?
           </ModalBody>
-          <ModalFooter gap={3}>
-            <Button size={'sm'} onClick={onClose} isLoading={loading}>Cancel</Button>
-            <Button size={'sm'} colorScheme="red" onClick={handleDelete} isLoading={loading}>
+          <ModalFooter gap={2} flexDir={{ base: 'column-reverse', md: 'row' }} pb={{ base: 8, md: 5 }}>
+            <Button
+              size={'sm'}
+              w={{ base: 'full', md: 'fit-content' }}
+              colorScheme="red"
+              onClick={handleDelete}
+              isLoading={loading}
+            >
               Delete
+            </Button>
+            <Button
+              size={'sm'}
+              w={{ base: 'full', md: 'fit-content' }}
+              onClick={onClose}
+              isDisabled={loading}
+            >
+              Cancel
             </Button>
           </ModalFooter>
         </ModalContent>
       </ModalOverlay>
-    </Modal>
+    </Modal >
   )
 }

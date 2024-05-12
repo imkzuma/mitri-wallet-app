@@ -36,6 +36,7 @@ export default function IncomeItems({ item }: { item: IncomesProps }) {
     >
       <ModalDeleteIncome isOpen={showDelete} onClose={onCloseDelete} id={item.id} />
       <ModalEditIncome isOpen={showEdit} onClose={onCloseEdit} income={item} />
+
       <Link
         key={item.id}
         href={{

@@ -3,12 +3,20 @@ import { Button, Flex, Icon, Menu, MenuButton, MenuItem, MenuList, Stack, Text, 
 import { BsThreeDotsVertical } from "react-icons/bs";
 import ModalDeleteExpense from "./ModalDelete";
 import { ExpensesProps } from "@/lib/redux/state/expenses";
+import { useState } from "react";
+import ModalEditExpense from "./ModalEdit";
 
-interface IncomesItemsProps extends Omit<ExpensesProps, 'description' | 'createdAt' | 'updatedAt'> { };
+export default function ExpenseItems({ item }: { item: ExpensesProps }) {
+  const [showDelete, setShowDelete] = useState<boolean>(false);
+  const [showEdit, setShowEdit] = useState<boolean>(false);
 
-export default function ExpenseItems({ item }: { item: IncomesItemsProps }) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const formatIDR = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(item.amount);
+
+  const onOpenDelete = () => setShowDelete(true);
+  const onCloseDelete = () => setShowDelete(false);
+
+  const onOpenEdit = () => setShowEdit(true);
+  const onCloseEdit = () => setShowEdit(false);
 
   return (
     <Flex
@@ -26,7 +34,9 @@ export default function ExpenseItems({ item }: { item: IncomesItemsProps }) {
       alignItems="center"
       cursor="pointer"
     >
-      <ModalDeleteExpense isOpen={isOpen} onClose={onClose} id={item.id} />
+      <ModalDeleteExpense isOpen={showDelete} onClose={onCloseDelete} id={item.id} />
+      <ModalEditExpense isOpen={showEdit} onClose={onCloseEdit} expense={item} />
+
       <Link
         key={item.id}
         href={{
@@ -58,8 +68,8 @@ export default function ExpenseItems({ item }: { item: IncomesItemsProps }) {
           <Icon as={BsThreeDotsVertical} />
         </MenuButton>
         <MenuList>
-          <MenuItem>Edit</MenuItem>
-          <MenuItem color={'red'} onClick={onOpen}>Delete</MenuItem>
+          <MenuItem onClick={onOpenEdit}>Edit</MenuItem>
+          <MenuItem color={'red'} onClick={onOpenDelete}>Delete</MenuItem>
         </MenuList>
       </Menu>
     </Flex>
