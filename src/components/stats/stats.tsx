@@ -12,10 +12,10 @@ export default function Statistics({ title, amount, percent, loading }: Statisti
 
   return (
     <Stat bg={useColorModeValue('white', 'gray.700')} p={5} rounded={'lg'} w={'full'}>
-      <StatLabel fontSize={'xl'}>{title}</StatLabel>
+      <StatLabel fontSize={{ md: 'xl' }}>{title}</StatLabel>
       {loading
         ? <Skeleton noOfLines={1} h={8} my={2} />
-        : <StatNumber>{formatIDR}</StatNumber>
+        : <StatNumber fontSize={{ base: 'lg', md: '2xl' }}>{formatIDR}</StatNumber>
       }
       <StatHelpText>
         <StatArrow type='increase' />

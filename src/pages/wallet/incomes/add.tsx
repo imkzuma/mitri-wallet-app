@@ -17,7 +17,7 @@ export default function AddIncomesPage() {
 
       <ProtectedMainLayout>
         <TitleBarDetail title="Add Income" onBackHref="/wallet" />
-        <Flex py={5} align={'start'} gap={5}>
+        <Flex py={5} align={'start'} gap={5} flexWrap={{ base: 'wrap', md: 'nowrap' }}>
           <HistoryUserInfo currentUser={user} type="income" />
           <IncomeForm />
         </Flex>

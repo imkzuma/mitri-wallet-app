@@ -39,16 +39,18 @@ export default function Navbar() {
         <Flex justify={'space-between'} align={'center'} py={4}>
           <Heading fontSize={'2xl'} fontWeight={'black'}>MiTri.</Heading>
           <Flex align={'center'} gap={8}>
-            <Link href={'/'}>
-              <Text color={useColorModeValue('gray.500', 'gray.300')} _hover={{ color: 'blue.400' }}>
-                Home
-              </Text>
-            </Link>
-            <Link href={'/wallet'}>
-              <Text color={useColorModeValue('gray.500', 'gray.300')} _hover={{ color: 'blue.400' }}>
-                My Wallet
-              </Text>
-            </Link>
+            <Flex align={'center'} gap={8} display={{ base: 'none', md: 'flex' }}>
+              <Link href={'/'}>
+                <Text color={useColorModeValue('gray.500', 'gray.300')} _hover={{ color: 'blue.400' }}>
+                  Home
+                </Text>
+              </Link>
+              <Link href={'/wallet'}>
+                <Text color={useColorModeValue('gray.500', 'gray.300')} _hover={{ color: 'blue.400' }}>
+                  My Wallet
+                </Text>
+              </Link>
+            </Flex>
 
             <Flex align={'center'} gap={3}>
               {colorMode === 'light'

@@ -62,7 +62,7 @@ export default function DetailExpensePage() {
 
       <ProtectedMainLayout>
         <TitleBarDetail title="Detail Expense" onBackHref="/wallet" />
-        <Flex py={5} align={'start'} gap={5}>
+        <Flex py={5} align={'start'} gap={5} flexWrap={{ base: 'wrap', md: 'nowrap' }}>
           <HistoryUserInfo currentUser={user} type="expense" isLoading={expenses.isLoading} />
           <DetailExpense />
         </Flex>

@@ -21,7 +21,12 @@ export default function WalletStatistic() {
       <Heading fontSize={'2xl'}>
         Wallet Statistics
       </Heading>
-      <Flex align={'center'} gap={8} flexWrap={'wrap'} flexDir={{ base: 'column', md: 'row' }}>
+      <Flex
+        align={'center'}
+        gap={{ base: 4, md: 8 }}
+        flexWrap={'wrap'}
+        flexDir={{ base: 'row', md: 'row' }}
+      >
         <Statistics
           title="Income"
           amount={totalIncome}
@@ -41,29 +46,30 @@ export default function WalletStatistic() {
           loading={income.isLoading || expense.isLoading}
         />
       </Flex>
-      <Flex align={'center'} gap={8} flexDir={{ base: 'column', md: 'row' }}>
+
+      <Flex align={'center'} gap={{ base: 4, md: 8 }} flexDir={{ base: 'row', md: 'row' }}>
         <Button
           colorScheme={'blue'}
-          w={'full'}
-          h={'36'}
+          w={{ base: 'full' }}
+          h={{ base: 24, md: '36' }}
           flexDir={'column'}
-          gap={5}
-          fontSize={'xl'}
+          gap={{ base: 3, md: 5 }}
+          fontSize={{ base: 'lg', md: 'xl' }}
           onClick={() => router.push("/wallet/incomes/add")}
         >
-          <Icon as={FiDownload} boxSize={6} />
+          <Icon as={FiDownload} boxSize={{ base: 5, md: 6 }} />
           Add Income
         </Button>
         <Button
           colorScheme={'red'}
-          w={'full'}
-          h={'36'}
+          w={{ base: 'full' }}
+          h={{ base: 24, md: '36' }}
           flexDir={'column'}
-          gap={5}
-          fontSize={'xl'}
+          gap={{ base: 3, md: 5 }}
+          fontSize={{ base: 'lg', md: 'xl' }}
           onClick={() => router.push("/wallet/expenses/add")}
         >
-          <Icon as={FiUpload} boxSize={6} />
+          <Icon as={FiUpload} boxSize={{ base: 5, md: 6 }} />
           Add Expense
         </Button>
       </Flex>

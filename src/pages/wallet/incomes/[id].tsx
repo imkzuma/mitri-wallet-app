@@ -62,7 +62,7 @@ export default function DetailIncomePage() {
 
       <ProtectedMainLayout>
         <TitleBarDetail title="Detail Income" onBackHref="/wallet" />
-        <Flex py={5} align={'start'} gap={5}>
+        <Flex py={5} align={'start'} gap={5} flexWrap={{ base: 'wrap', md: 'nowrap' }}>
           <HistoryUserInfo currentUser={user} type="income" isLoading={incomes.isLoading} />
           <DetailIncome />
         </Flex>

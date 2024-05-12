@@ -12,6 +12,7 @@ export default function HistoryUserInfo({ currentUser, type, isLoading }: UserIn
     <Stack
       align="center"
       bg={useColorModeValue("white", "gray.700")}
+      w={{ base: 'full', md: 'auto' }}
       p={5}
       rounded="lg"
       border="1px"

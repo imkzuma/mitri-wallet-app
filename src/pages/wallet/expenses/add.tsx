@@ -17,7 +17,7 @@ export default function AddExpensesPage() {
 
       <ProtectedMainLayout>
         <TitleBarDetail title="Add Expense" onBackHref="/wallet" />
-        <Flex py={5} align={'start'} gap={5}>
+        <Flex py={5} align={'start'} gap={5} flexWrap={{ base: 'wrap', md: 'nowrap' }}>
           <HistoryUserInfo currentUser={user} type="expense" />
           <ExpenseForm />
         </Flex>
