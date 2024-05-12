@@ -2,9 +2,9 @@ import { useAppSelector } from "@/lib/redux/hooks";
 import { RootState } from "@/lib/redux/store";
 import { Button, Flex, FormControl, FormLabel, Input, Skeleton, Stack, Textarea, useColorModeValue } from "@chakra-ui/react";
 
-export default function DetailIncome() {
-  const incomes: any = useAppSelector((state: RootState) => state.incomes);
-  const formatIDR = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(incomes.data?.amount || 0);
+export default function DetailExpense() {
+  const expenses: any = useAppSelector((state: RootState) => state.expenses);
+  const formatIDR = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(expenses.data?.amount || 0);
 
   return (
     <Stack
@@ -16,7 +16,7 @@ export default function DetailIncome() {
       border={'1px'}
       borderColor={useColorModeValue('gray.200', 'gray.800')}
     >
-      {incomes.isLoading
+      {expenses.isLoading
         ? (
           Array.from({ length: 5 }).map((_, i) => (
             <Skeleton key={i} height={20} rounded={'lg'} />
@@ -29,25 +29,25 @@ export default function DetailIncome() {
               <Input value={formatIDR} />
             </FormControl>
             <FormControl isReadOnly>
-              <FormLabel>Income Source</FormLabel>
-              <Input value={incomes.data?.from || ''} />
+              <FormLabel>Expense For</FormLabel>
+              <Input value={expenses.data?.to || ''} />
             </FormControl>
             <FormControl isReadOnly>
-              <FormLabel>Income Description</FormLabel>
-              <Textarea value={incomes.data?.description || ''} />
+              <FormLabel>Expense Description</FormLabel>
+              <Textarea value={expenses.data?.description || ''} />
             </FormControl>
             <FormControl isReadOnly>
-              <FormLabel>Income Date</FormLabel>
-              <Input type="date" value={incomes.data?.date || ''} />
+              <FormLabel>Expense Date</FormLabel>
+              <Input type="date" value={expenses.data?.date || ''} />
             </FormControl>
             <Flex w={'full'} align={'center'} gap={5}>
               <FormControl isReadOnly>
                 <FormLabel>Created At</FormLabel>
-                <Input type="text" value={incomes.data?.createdAt || ''} />
+                <Input type="text" value={expenses.data?.createdAt || ''} />
               </FormControl>
               <FormControl isReadOnly>
                 <FormLabel>Updated At</FormLabel>
-                <Input type="text" value={incomes.data?.updatedAt || ''} />
+                <Input type="text" value={expenses.data?.updatedAt || ''} />
               </FormControl>
             </Flex>
             <Flex justify={'end'} pt={5}>

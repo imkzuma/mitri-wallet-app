@@ -37,7 +37,9 @@ export const getDetailMyIncome = async (uid: string, id: string): Promise<Income
     }
     throw new Error('Unauthorized');
   } catch (error: any) {
+    console.log(error)
     if (error instanceof AxiosError) {
+      console.log(error.response?.data.message || error.message)
       throw new Error(error.response?.data.message || error.message);
     }
 

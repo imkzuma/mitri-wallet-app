@@ -1,44 +1,58 @@
-import ProtectedMainLayout from "@/layouts/ProtectedLayout";
-import { getDetailMyExpense } from "@/lib/api/expense";
-import { auth } from "@/lib/firebase";
-import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
-import { fetchExpensesEnd, fetchExpensesFailure, fetchExpensesStart, fetchExpensesSuccess } from "@/lib/redux/state/expenses";
-import { RootState } from "@/lib/redux/store";
-import Head from "next/head";
-import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { useRouter } from "next/router";
+import Head from "next/head";
+import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
+import { RootState } from "@/lib/redux/store";
+import { useFirebaseAuth } from "@/lib/firebase/auth";
+import { TitleBarDetail } from "@/components/wallet/TitleBar";
+import ProtectedMainLayout from "@/layouts/ProtectedLayout";
+import HistoryUserInfo from "@/components/wallet/history/UserInfo";
+import { Flex, useToast } from "@chakra-ui/react";
+import { getDetailMyExpense } from "@/lib/api/expense";
+import { fetchExpensesEnd, fetchExpensesFailure, fetchExpensesStart, fetchExpensesSuccess } from "@/lib/redux/state/expenses";
+import DetailExpense from "@/components/wallet/history/expenses/detail";
 
 export default function DetailExpensePage() {
-  const expenses = useAppSelector((state: RootState) => state.expenses);
-  const dispatch = useAppDispatch();
-
-  const uid = auth.currentUser?.uid;
+  const toast = useToast();
   const router = useRouter();
+
+  const dispatch = useAppDispatch();
+  const expenses: any = useAppSelector((state: RootState) => state.expenses);
+
+  const { user } = useFirebaseAuth();
   const { id } = router.query;
 
   useEffect(() => {
     const fetchDetailExpense = async () => {
-      if (!uid || typeof id !== 'string') return;
+      if (!user || typeof id !== 'string') return;
 
       dispatch(fetchExpensesStart());
       try {
-        const response = await getDetailMyExpense(uid, id);
-        console.log(response);
+        const response = await getDetailMyExpense(user.uid, id);
         dispatch(fetchExpensesSuccess(response));
       } catch (error: any) {
-        console.error(error);
-        dispatch(fetchExpensesFailure(error.message));
+        dispatch(fetchExpensesFailure(error));
       } finally {
         dispatch(fetchExpensesEnd());
       }
     };
 
     fetchDetailExpense();
+  }, [dispatch, user, id]);
 
-  }, [uid, id, dispatch]);
+  if (expenses.error) {
+    router.replace('/wallet');
+    toast.closeAll();
 
-  if (expenses.error) router.replace("/wallet");
-  if (expenses.isLoading) return <p>Loading...</p>
+    return toast({
+      title: "Error",
+      description: "Not data found!",
+      status: "error",
+      duration: 5000,
+      isClosable: true,
+      position: "top-right"
+    });
+  }
 
   return (
     <>
@@ -47,8 +61,11 @@ export default function DetailExpensePage() {
       </Head>
 
       <ProtectedMainLayout>
-        <h1>Detail Expense Page</h1>
-        <p>Detail Expense Page {id}</p>
+        <TitleBarDetail title="Detail Expense" onBackHref="/wallet" />
+        <Flex py={5} align={'start'} gap={5}>
+          <HistoryUserInfo currentUser={user} type="expense" isLoading={expenses.isLoading} />
+          <DetailExpense />
+        </Flex>
       </ProtectedMainLayout>
     </>
   )
