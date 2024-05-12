@@ -4,7 +4,7 @@ import type { User } from "firebase/auth";
 interface UserInfoProps {
   currentUser: User | null;
   type: "income" | "expense";
-  isLoading: boolean;
+  isLoading?: boolean;
 }
 
 export default function HistoryUserInfo({ currentUser, type, isLoading }: UserInfoProps) {

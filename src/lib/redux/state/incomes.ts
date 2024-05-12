@@ -45,6 +45,15 @@ const incomes = createSlice({
     deleteIncome: (state, action) => {
       state.data = state.data.filter((item) => item.id !== action.payload);
     },
+    editIncome: (state, action) => {
+      state.data = state.data.map((item) => {
+        if (item.id === action.payload.id) {
+          return action.payload;
+        }
+
+        return item;
+      });
+    },
   },
 });
 
@@ -54,6 +63,7 @@ export const {
   fetchIncomesFailure,
   fetchIncomesEnd,
   deleteIncome,
+  editIncome,
 } = incomes.actions;
 
 export default incomes;

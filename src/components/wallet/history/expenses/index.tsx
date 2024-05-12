@@ -1,8 +1,8 @@
 import { useAppSelector } from "@/lib/redux/hooks";
-import { Skeleton, Stack, Text } from "@chakra-ui/react";
+import { Skeleton, Stack } from "@chakra-ui/react";
 import ExpenseGroups from "@/components/wallet/history/expenses/ExpenseGroups";
 import ExpenseItems from "@/components/wallet/history/expenses/ExpenseItems";
-import { ExpensesProps, fetchExpensesEnd, fetchExpensesFailure, fetchExpensesStart, fetchExpensesSuccess } from "@/lib/redux/state/expenses";
+import { ExpensesProps } from "@/lib/redux/state/expenses";
 
 interface GroupedExpenses { [date: string]: ExpensesProps[]; }
 

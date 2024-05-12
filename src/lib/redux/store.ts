@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import incomes from './state/incomes';
-import expenses from './state/expenses';
+import incomes from '@/lib/redux/state/incomes';
+import expenses from '@/lib/redux/state/expenses';
 
 export const store = configureStore({
   reducer: {

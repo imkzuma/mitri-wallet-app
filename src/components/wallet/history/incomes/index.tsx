@@ -1,6 +1,6 @@
 import { useAppSelector } from "@/lib/redux/hooks";
 import { IncomesProps } from "@/lib/redux/state/incomes";
-import { Skeleton, Stack, Text } from "@chakra-ui/react";
+import { Skeleton, Stack } from "@chakra-ui/react";
 import IncomeGroups from "@/components/wallet/history/incomes/IncomeGroups";
 import IncomeItems from "@/components/wallet/history/incomes/IncomeItems";
 

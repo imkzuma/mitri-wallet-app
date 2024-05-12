@@ -1,14 +1,22 @@
 import Link from "next/link";
 import { IncomesProps } from "@/lib/redux/state/incomes";
-import { Button, Flex, Icon, Menu, MenuButton, MenuItem, MenuList, Stack, Text, useColorModeValue, useDisclosure } from "@chakra-ui/react";
+import { Button, Flex, Icon, Menu, MenuButton, MenuItem, MenuList, Stack, Text, useColorModeValue } from "@chakra-ui/react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import ModalDeleteIncome from "./ModalDelete";
+import { useState } from "react";
+import ModalEditIncome from "./ModalEdit";
 
-interface IncomesItemsProps extends Omit<IncomesProps, 'description' | 'createdAt' | 'updatedAt'> { };
+export default function IncomeItems({ item }: { item: IncomesProps }) {
+  const [showDelete, setShowDelete] = useState<boolean>(false);
+  const [showEdit, setShowEdit] = useState<boolean>(false);
 
-export default function IncomeItems({ item }: { item: IncomesItemsProps }) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const formatIDR = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(item.amount);
+
+  const onOpenDelete = () => setShowDelete(true);
+  const onCloseDelete = () => setShowDelete(false);
+
+  const onOpenEdit = () => setShowEdit(true);
+  const onCloseEdit = () => setShowEdit(false);
 
   return (
     <Flex
@@ -26,7 +34,8 @@ export default function IncomeItems({ item }: { item: IncomesItemsProps }) {
       alignItems="center"
       cursor="pointer"
     >
-      <ModalDeleteIncome isOpen={isOpen} onClose={onClose} id={item.id} />
+      <ModalDeleteIncome isOpen={showDelete} onClose={onCloseDelete} id={item.id} />
+      <ModalEditIncome isOpen={showEdit} onClose={onCloseEdit} income={item} />
       <Link
         key={item.id}
         href={{
@@ -58,8 +67,8 @@ export default function IncomeItems({ item }: { item: IncomesItemsProps }) {
           <Icon as={BsThreeDotsVertical} />
         </MenuButton>
         <MenuList>
-          <MenuItem>Edit</MenuItem>
-          <MenuItem color={'red'} onClick={onOpen}>Delete</MenuItem>
+          <MenuItem onClick={onOpenEdit}>Edit</MenuItem>
+          <MenuItem color={'red'} onClick={onOpenDelete}>Delete</MenuItem>
         </MenuList>
       </Menu>
     </Flex>

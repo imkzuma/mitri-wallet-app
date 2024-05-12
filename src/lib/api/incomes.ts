@@ -79,7 +79,7 @@ export const deleteMyIncome = async (id: number, uid: string): Promise<void> => 
   }
 };
 
-export const updateMyIncome = async (id: string, uid: string, income: Omit<IncomeItem, 'userId' | 'id'>): Promise<IncomeItem> => {
+export const updateMyIncome = async (id: number, uid: string, income: Omit<IncomeItem, 'userId' | 'id'>): Promise<IncomeItem> => {
   try {
     const { data } = await WalletApi.get(`/incomes/${id}`);
     if (data.userId !== uid) {

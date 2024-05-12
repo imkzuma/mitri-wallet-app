@@ -21,7 +21,7 @@ export default function IncomeForm() {
 
   const [loading, setLoading] = useState<boolean>(false);
 
-  const formBg = useColorModeValue('white', 'gray.800');
+  const formBg = useColorModeValue('white', 'gray.700');
 
   const handleSubmit = async (values: IncomesProps) => {
     setLoading(true);
@@ -60,7 +60,7 @@ export default function IncomeForm() {
       }}
     >
       {({ values, errors, touched, handleSubmit }) => (
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} style={{ width: "100%" }}>
           <Stack spacing={5} bg={formBg} p={6} rounded={'lg'}>
             <FormControl isRequired isInvalid={!!errors.amount && touched.amount}>
               <FormLabel>Amount</FormLabel>
@@ -99,7 +99,7 @@ export default function IncomeForm() {
               >
                 Submit
               </Button>
-              <Button variant={'outline'} colorScheme="red" type="reset">
+              <Button variant={'outline'} colorScheme="red" type="reset" isDisabled={loading}>
                 Cancel
               </Button>
             </Flex>

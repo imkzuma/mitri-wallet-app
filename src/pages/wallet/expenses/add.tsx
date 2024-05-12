@@ -1,11 +1,14 @@
 import ExpenseForm from "@/components/wallet/history/forms/expense";
-import TitleBar from "@/components/wallet/TitleBar";
+import HistoryUserInfo from "@/components/wallet/history/UserInfo";
+import TitleBar, { TitleBarDetail } from "@/components/wallet/TitleBar";
 import ProtectedMainLayout from "@/layouts/ProtectedLayout";
-import { Container } from "@chakra-ui/react";
-import { Formik } from "formik";
+import { useFirebaseAuth } from "@/lib/firebase/auth";
+import { Flex } from "@chakra-ui/react";
 import Head from "next/head";
 
 export default function AddExpensesPage() {
+  const { user } = useFirebaseAuth();
+
   return (
     <>
       <Head>
@@ -13,10 +16,11 @@ export default function AddExpensesPage() {
       </Head>
 
       <ProtectedMainLayout>
-        <Container py={5}>
-          <TitleBar title="Add Expense" />
+        <TitleBarDetail title="Add Expense" onBackHref="/wallet" />
+        <Flex py={5} align={'start'} gap={5}>
+          <HistoryUserInfo currentUser={user} type="expense" />
           <ExpenseForm />
-        </Container>
+        </Flex>
       </ProtectedMainLayout>
     </>
   )
