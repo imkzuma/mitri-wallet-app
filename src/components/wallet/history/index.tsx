@@ -1,4 +1,4 @@
-import { Heading, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from "@chakra-ui/react";
+import { Button, Heading, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from "@chakra-ui/react";
 import HistoryIncomes from "@/components/wallet/history/incomes";
 import HistoryExpenses from "./expenses";
 import { useAppSelector } from "@/lib/redux/hooks";
@@ -26,8 +26,14 @@ export default function WalletHistory() {
                 <Text textAlign={'center'} fontSize={'lg'}>
                   No incomes yet
                 </Text>
+              ) : (
+                <Stack spacing={8}>
+                  <HistoryIncomes />
+                  <Button py={7} variant={'ghost'} colorScheme="blue">
+                    See More
+                  </Button>
+                </Stack>
               )
-              : <HistoryIncomes />
             }
           </TabPanel>
           <TabPanel px={0}>
@@ -36,7 +42,14 @@ export default function WalletHistory() {
                 <Text textAlign={'center'} fontSize={'lg'}>
                   No expenses yet
                 </Text>
-              ) : <HistoryExpenses />
+              ) : (
+                <Stack spacing={8}>
+                  <HistoryExpenses />
+                  <Button py={7} variant={'ghost'} colorScheme="blue">
+                    See More
+                  </Button>
+                </Stack>
+              )
             }
           </TabPanel>
         </TabPanels>

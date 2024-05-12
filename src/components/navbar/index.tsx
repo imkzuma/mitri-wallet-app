@@ -31,6 +31,9 @@ export default function Navbar() {
       bg={useColorModeValue('white', 'gray.800')}
       borderBottom={'1px'}
       borderColor={useColorModeValue('gray.200', 'gray.800')}
+      pos={'sticky'}
+      top={0}
+      zIndex={9999}
     >
       <Container maxW={'8xl'}>
         <Flex justify={'space-between'} align={'center'} py={4}>
