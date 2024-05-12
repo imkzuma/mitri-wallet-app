@@ -16,7 +16,7 @@ export default function ProfileInfo({ user }: { user: User | null }) {
 
       <Stack spacing={1} w={'full'} textAlign={'center'}>
         <Text fontWeight={'medium'}>
-          {user?.displayName}
+          {user?.displayName || user?.email}
         </Text>
         <Text fontSize={'sm'} color={useColorModeValue('gray.500', 'gray.400')}>
           {user?.email}
