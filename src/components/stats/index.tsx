@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { FiUpload, FiDownload } from "react-icons/fi";
 import { useAppSelector } from "@/lib/redux/hooks";
 import { RootState } from "@/lib/redux/store";
+import Link from "next/link";
 
 export default function WalletStatistic() {
   const router = useRouter();
@@ -73,6 +74,14 @@ export default function WalletStatistic() {
           Add Expense
         </Button>
       </Flex>
+
+      <Link href="/ai">
+        <Flex justify={'center'} w={'full'} pt={5}>
+          <Button variant={'outline'} colorScheme="green" w={'fit-content'} px={{ md: 12 }}>
+            Ask MiTri AI about your financial condition
+          </Button>
+        </Flex>
+      </Link>
     </Stack>
   )
 }
