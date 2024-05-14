@@ -38,10 +38,11 @@ export default function FinancePromptGenerator() {
 
   const generate = async () => {
     const prompt = generateFinancePrompt(expenses, incomes);
-
+    console.log(prompt);
     setResponse((prevState) => { return { ...prevState, isLoading: true } });
     try {
       const result = await model.generateContent(prompt);
+      console.log(result);
       const response = await result.response;
       const text = await response.text();
 

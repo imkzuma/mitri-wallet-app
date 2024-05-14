@@ -75,13 +75,15 @@ export default function WalletStatistic() {
         </Button>
       </Flex>
 
-      <Link href="/ai">
-        <Flex justify={'center'} w={'full'} pt={5}>
-          <Button variant={'outline'} colorScheme="green" w={{ base: 'full', md: 'fit-content' }} px={{ md: 12 }}>
-            Ask MiTri AI about your financial condition
-          </Button>
-        </Flex>
-      </Link>
+      {(income.data.length > 0 && expense.data.length > 0) && (
+        <Link href="/ai">
+          <Flex justify={'center'} w={'full'} pt={5}>
+            <Button variant={'outline'} colorScheme="green" w={{ base: 'full', md: 'fit-content' }} px={{ md: 12 }}>
+              Ask MiTri AI about your financial condition
+            </Button>
+          </Flex>
+        </Link>
+      )}
     </Stack>
   )
 }
