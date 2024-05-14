@@ -77,7 +77,7 @@ export default function WalletStatistic() {
 
       <Link href="/ai">
         <Flex justify={'center'} w={'full'} pt={5}>
-          <Button variant={'outline'} colorScheme="green" w={'fit-content'} px={{ md: 12 }}>
+          <Button variant={'outline'} colorScheme="green" w={{ base: 'full', md: 'fit-content' }} px={{ md: 12 }}>
             Ask MiTri AI about your financial condition
           </Button>
         </Flex>

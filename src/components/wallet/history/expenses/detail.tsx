@@ -2,12 +2,16 @@ import { useAppSelector } from "@/lib/redux/hooks";
 import { RootState } from "@/lib/redux/store";
 import { Button, Flex, FormControl, FormLabel, Input, Skeleton, Stack, Textarea, useColorModeValue, useDisclosure } from "@chakra-ui/react";
 import ModalEditExpense from "./ModalEdit";
+import { useState } from "react";
 
 export default function DetailExpense() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [showEdit, setShowEdit] = useState<boolean>(false);
 
   const expenses: any = useAppSelector((state: RootState) => state.expenses);
   const formatIDR = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(expenses.data?.amount || 0);
+
+  const onOpenEdit = () => setShowEdit(true);
+  const onCloseEdit = () => setShowEdit(false);
 
   return (
     <Stack
@@ -19,7 +23,8 @@ export default function DetailExpense() {
       border={'1px'}
       borderColor={useColorModeValue('gray.200', 'gray.800')}
     >
-      <ModalEditExpense isOpen={isOpen} onClose={onClose} expense={expenses.data} />
+      <ModalEditExpense isOpen={showEdit} onClose={onCloseEdit} expense={expenses.data} />
+
       {expenses.isLoading
         ? (
           Array.from({ length: 5 }).map((_, i) => (
@@ -54,8 +59,8 @@ export default function DetailExpense() {
                 <Input type="text" value={expenses.data?.updatedAt || ''} />
               </FormControl>
             </Flex>
-            <Flex justify={'end'} pt={5}>
-              <Button colorScheme={'blue'} px={12} onClick={onOpen}>Edit</Button>
+            <Flex justify={'end'} pt={{ base: 10, md: 5 }} gap={{ base: 3, md: 5 }} flexDir={{ base: 'column', md: 'row' }}>
+              <Button colorScheme={'blue'} px={12} onClick={onOpenEdit}>Edit</Button>
             </Flex>
           </>
         )

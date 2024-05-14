@@ -45,14 +45,19 @@ const incomes = createSlice({
     deleteIncome: (state, action) => {
       state.data = state.data.filter((item) => item.id !== action.payload);
     },
-    editIncome: (state, action) => {
-      state.data = state.data.map((item) => {
-        if (item.id === action.payload.id) {
-          return action.payload;
+    editIncome: (state: any, action) => {
+      if (Array.isArray(state.data)) {
+        state.data = state.data.map((item: any) => {
+          if (item.id === action.payload.id) {
+            return action.payload;
+          }
+          return item;
+        });
+      } else if (typeof state.data === 'object' && state.data !== null) {
+        if (state.data.id === action.payload.id) {
+          state.data = action.payload;
         }
-
-        return item;
-      });
+      }
     },
   },
 });

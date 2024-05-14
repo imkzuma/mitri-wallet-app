@@ -2,6 +2,7 @@ import { updateMyExpense } from "@/lib/api/expense";
 import { useFirebaseAuth } from "@/lib/firebase/auth";
 import { useAppDispatch } from "@/lib/redux/hooks";
 import { editExpense, type ExpensesProps } from "@/lib/redux/state/expenses";
+import { ExpenseSchema } from "@/schema/expense";
 import { IncomeSchema } from "@/schema/income";
 import { Button, FormControl, FormErrorMessage, FormLabel, Input, InputGroup, InputLeftElement, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Textarea, useToast } from "@chakra-ui/react";
 import { Field, Form, Formik } from "formik";
@@ -47,7 +48,7 @@ export default function ModalEditExpense({ isOpen, onClose, expense }: ModalEdit
       dispatch(editExpense(response));
       return toast({
         title: "Success",
-        description: "Income updated successfully",
+        description: "Expense updated successfully",
         status: "success",
         duration: 5000,
         isClosable: true,
@@ -56,7 +57,7 @@ export default function ModalEditExpense({ isOpen, onClose, expense }: ModalEdit
     } catch (error) {
       return toast({
         title: "Error",
-        description: "Failed to update income",
+        description: "Failed to update expense",
         status: "error",
         duration: 5000,
         isClosable: true,
@@ -92,7 +93,7 @@ export default function ModalEditExpense({ isOpen, onClose, expense }: ModalEdit
                 to: expense.to,
                 date: expense.date
               }}
-              validationSchema={IncomeSchema}
+              validationSchema={ExpenseSchema}
               onSubmit={(values) => {
                 handleSubmit(values);
               }}
