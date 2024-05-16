@@ -15,6 +15,7 @@ const LoadingScreen = () => {
 export default function UnprotectedMainLayout({ children }: { children: React.ReactNode }) {
   const { isLoading } = useFirebaseAuth();
   const bg = useColorModeValue('white', 'gray.800');
+  const bgFooter = useColorModeValue('gray.50', 'gray.900');
 
   if (isLoading) return <LoadingScreen />
 
@@ -41,7 +42,7 @@ export default function UnprotectedMainLayout({ children }: { children: React.Re
         >
           <Image src="/astrocat.png" alt="astrocat" objectFit={'cover'} />
         </Box>
-        <Box bg={useColorModeValue('gray.50', 'gray.900')} mt={-10}>
+        <Box bg={bgFooter} mt={-10}>
           <Footer />
         </Box>
       </Box>
