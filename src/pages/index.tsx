@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Box, Heading, Image, Text, useColorMode, useColorModeValue } from "@chakra-ui/react";
+import { Box, Image, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import UnprotectedMainLayout from "@/layouts/UnprotectedLayout";
 import Hero from "@/components/home/hero";
 import HeroImage from "@/components/home/hero/heroImage";
