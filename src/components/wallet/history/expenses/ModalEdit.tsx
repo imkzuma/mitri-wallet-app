@@ -3,7 +3,6 @@ import { useFirebaseAuth } from "@/lib/firebase/auth";
 import { useAppDispatch } from "@/lib/redux/hooks";
 import { editExpense, type ExpensesProps } from "@/lib/redux/state/expenses";
 import { ExpenseSchema } from "@/schema/expense";
-import { IncomeSchema } from "@/schema/income";
 import { Button, FormControl, FormErrorMessage, FormLabel, Input, InputGroup, InputLeftElement, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Textarea, useToast } from "@chakra-ui/react";
 import { Field, Form, Formik } from "formik";
 import { useRef, useState } from "react";

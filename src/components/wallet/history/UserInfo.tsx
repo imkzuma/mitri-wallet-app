@@ -3,7 +3,7 @@ import type { User } from "firebase/auth";
 
 interface UserInfoProps {
   currentUser: User | null;
-  type: "income" | "expense";
+  type: "income" | "expense" | "profile";
   isLoading?: boolean;
 }
 
@@ -29,9 +29,8 @@ export default function HistoryUserInfo({ currentUser, type, isLoading }: UserIn
             </Stack>
             <Divider my={3} />
             <Badge colorScheme={type === 'income' ? 'green' : 'red'} rounded="full" px={3}>
-              {type === "income" ? "Income" : "Expense"}
+              {type.toUpperCase()}
             </Badge>
-
           </>
         )
       }
