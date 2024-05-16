@@ -1,6 +1,8 @@
+import Footer from "@/components/footer";
+import SectionAsked from "@/components/home/asked";
 import Navbar from "@/components/navbar"
 import { useFirebaseAuth } from "@/lib/firebase/auth";
-import { Box, Container, Flex, Spinner, useColorModeValue } from "@chakra-ui/react"
+import { Box, Container, Flex, Image, Spinner, useColorModeValue } from "@chakra-ui/react"
 
 const LoadingScreen = () => {
   return (
@@ -12,16 +14,37 @@ const LoadingScreen = () => {
 
 export default function UnprotectedMainLayout({ children }: { children: React.ReactNode }) {
   const { isLoading } = useFirebaseAuth();
-  const bg = useColorModeValue('gray.100', 'gray.900');
+  const bg = useColorModeValue('white', 'gray.800');
 
   if (isLoading) return <LoadingScreen />
 
   return (
-    <Box minH={'100dvh'} w={'full'} bg={bg}>
+    <Flex
+      w={'full'}
+      minH={'100dvh'}
+      direction={'column'}
+    >
       <Navbar />
-      <Container maxW={"8xl"}>
+
+      <Box as="main"
+        bg={bg}
+        flex={1}
+      >
         {children}
-      </Container>
-    </Box>
+      </Box>
+
+      <Box pos={'relative'} zIndex={0}>
+        <SectionAsked />
+        <Box
+          w={{ base: 'full', sm: 'md' }}
+          mx={'auto'}
+        >
+          <Image src="/astrocat.png" alt="astrocat" objectFit={'cover'} />
+        </Box>
+        <Box bg={useColorModeValue('gray.50', 'gray.900')} mt={-10}>
+          <Footer />
+        </Box>
+      </Box>
+    </Flex>
   )
 }
